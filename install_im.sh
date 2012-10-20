@@ -56,15 +56,41 @@ function decompress_applications () {
 }
 
 # Before running anything try to download all requires files, saving time.
-try_download http://"$SF_MIRROR".dl.sourceforge.net/project/gs-fonts/gs-fonts/8.11%20%28base%2035%2C%20GPL%29/ghostscript-fonts-std-8.11.tar.gz
-try_download http://"$SF_MIRROR".dl.sourceforge.net/project/wvware/libwmf/0.2.8.4/libwmf-0.2.8.4.tar.gz
-try_download http://www.ijg.org/files/jpegsrc.v8d.tar.gz
-try_download http://download.osgeo.org/libtiff/tiff-4.0.1.tar.gz
-try_download http://"$SF_MIRROR".dl.sourceforge.net/project/lcms/lcms/2.3/lcms2-2.3.tar.gz
-try_download ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng-1.5.10.tar.gz
-try_download http://download.savannah.gnu.org/releases/freetype/freetype-2.4.9.tar.gz
-try_download http://ghostscript.googlecode.com/files/ghostscript-9.00.tar.gz
-try_download ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick.tar.gz
+if [ ! -e  "ghostscript-fonts-std-8.11.tar.gz" ] ; then
+  try_download http://"$SF_MIRROR".dl.sourceforge.net/project/gs-fonts/gs-fonts/8.11%20%28base%2035%2C%20GPL%29/ghostscript-fonts-std-8.11.tar.gz
+fi
+
+if [ ! -e "libwmf-0.2.8.4.tar.gz" ] ; then
+  try_download http://"$SF_MIRROR".dl.sourceforge.net/project/wvware/libwmf/0.2.8.4/libwmf-0.2.8.4.tar.gz
+fi
+
+if [ ! -e "jpegsrc.v8d.tar.gz" ] ; then
+  try_download http://www.ijg.org/files/jpegsrc.v8d.tar.gz
+fi
+
+if [ ! -e "tiff-4.0.1.tar.gz" ] ; then
+  try_download http://download.osgeo.org/libtiff/tiff-4.0.1.tar.gz
+fi
+
+if [ ! -e "lcms2-2.3.tar.gz" ] ; then
+  try_download http://"$SF_MIRROR".dl.sourceforge.net/project/lcms/lcms/2.3/lcms2-2.3.tar.gz
+fi
+
+if [ ! -e "libpng-1.5.13.tar.gz" ] ; then
+  try_download ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng-1.5.13.tar.gz
+fi
+
+if [ ! -e "freetype-2.4.9.tar.gz" ] ; then
+  try_download http://download.savannah.gnu.org/releases/freetype/freetype-2.4.9.tar.gz
+fi
+
+if [ ! -e "ghostscript-9.00.tar.gz" ] ; then
+  try_download http://ghostscript.googlecode.com/files/ghostscript-9.00.tar.gz
+fi
+
+if [ ! -e "ImageMagick.tar.gz" ] ; then
+  try_download ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick.tar.gz
+fi
 
 # Decompress applications.
 decompress_applications
@@ -73,7 +99,7 @@ echo "Starting..."
 
 # LibPNG.
 # Official PNG reference library.
-cd libpng-1.5.10
+cd libpng-1.5.13
 ./configure --prefix=$CONFIGURE_PREFIX
 make
 sudo make install
